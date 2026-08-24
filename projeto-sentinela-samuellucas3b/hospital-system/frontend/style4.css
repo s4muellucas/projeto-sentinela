@@ -1,0 +1,84 @@
+
+    .btn-tv {
+        background: #195e63;
+        color: #ece1c3;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 8px;
+    }
+
+    .btn-tv:hover {
+        background: #063940;
+    }
+
+
+    .btn-abrir-tv {
+        background: #3e838c;
+        color: #ece1c3;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .btn-abrir-tv:hover {
+        background: #195e63;
+    }
+
+
+    .consultorio-input {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+
+        background: #8ebdb6;
+
+        padding: 10px 14px;
+
+        border-radius: 6px;
+
+        border: 1px solid #3e838c;
+    }
+
+
+    .consultorio-input label {
+        font-weight: bold;
+
+        color: #063940;
+    }
+
+
+    .consultorio-input input {
+        width: 60px;
+
+        text-align: center;
+
+        font-size: 18px;
+
+        font-weight: bold;
+
+        padding: 4px 8px;
+
+        border: 1px solid #3e838c;
+
+        border-radius: 4px;
+
+        background: #ece1c3;
+
+        color: #063940;
+
+        outline: none;
+    }
+
+
+    .consultorio-input input:focus {
+        border-color: #063940;
+
+        box-shadow:
+            0 0 0 2px rgba(62, 131, 140, 0.25);
+    }

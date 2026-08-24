@@ -1,0 +1,537 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ==========================================
+   FUNDO
+========================================== */
+
+body {
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063940,
+            #195e63,
+            #3e838c
+        );
+
+    padding: 35px 20px;
+}
+
+
+/* ==========================================
+   CONTAINER
+========================================== */
+
+.container {
+    width: 950px;
+    max-width: 100%;
+
+    margin: auto;
+
+    background: #ece1c3;
+
+    padding: 35px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 45px rgba(6, 57, 64, 0.40);
+}
+
+
+/* ==========================================
+   CABEÇALHO
+========================================== */
+
+.container h2 {
+    color: #063940 !important;
+
+    font-size: 29px;
+
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   TÍTULOS
+========================================== */
+
+.container h3 {
+    color: #063940 !important;
+
+    font-size: 20px;
+
+    margin-bottom: 18px;
+}
+
+
+/* ==========================================
+   BOTÃO ABRIR TV
+========================================== */
+
+.btn-abrir-tv {
+    background: #3e838c !important;
+
+    color: #ece1c3 !important;
+
+    border: none !important;
+
+    padding: 10px 16px !important;
+
+    border-radius: 8px !important;
+
+    font-size: 14px !important;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn-abrir-tv:hover {
+    background: #195e63 !important;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px rgba(6, 57, 64, 0.25);
+}
+
+
+/* ==========================================
+   FILA DE PACIENTES
+========================================== */
+
+.pacientes-fila {
+    margin-bottom: 30px;
+
+    background: #8ebdb6 !important;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    border: 1px solid #3e838c !important;
+}
+
+
+.pacientes-fila h3 {
+    margin-top: 0;
+
+    color: #063940 !important;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.pacientes-fila h3 span {
+    font-size: 13px;
+
+    font-weight: normal;
+
+    color: #195e63 !important;
+}
+
+
+/* ==========================================
+   ÁREA DOS PACIENTES
+========================================== */
+
+#fila-pacientes {
+    margin-top: 15px;
+}
+
+
+/* ==========================================
+   PACIENTE NA FILA
+========================================== */
+
+.fila-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: #ece1c3 !important;
+
+    border-radius: 8px;
+
+    padding: 12px 15px;
+
+    margin-bottom: 9px;
+
+    border: 1px solid #3e838c !important;
+
+    transition: 0.3s;
+}
+
+
+.fila-item:hover {
+    transform: translateY(-2px);
+
+    background: #ffffff !important;
+
+    box-shadow:
+        0 6px 15px rgba(6, 57, 64, 0.15);
+}
+
+
+.fila-item strong {
+    font-size: 15px;
+
+    color: #063940 !important;
+}
+
+
+.fila-item small {
+    color: #195e63 !important;
+
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   BOTÃO CHAMAR NA TV
+========================================== */
+
+.btn-tv {
+    background: #195e63 !important;
+
+    color: #ece1c3 !important;
+
+    border: none !important;
+
+    padding: 8px 14px !important;
+
+    border-radius: 7px !important;
+
+    cursor: pointer;
+
+    font-size: 14px !important;
+
+    font-weight: bold;
+
+    margin-left: 8px;
+
+    transition: 0.3s;
+}
+
+
+.btn-tv:hover {
+    background: #063940 !important;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(6, 57, 64, 0.25);
+}
+
+
+/* ==========================================
+   BOTÃO ATUALIZAR
+========================================== */
+
+.pacientes-fila > button {
+    margin-top: 8px !important;
+
+    background: #195e63 !important;
+
+    color: #ece1c3 !important;
+
+    border: none !important;
+
+    padding: 7px 13px !important;
+
+    border-radius: 7px !important;
+
+    cursor: pointer;
+
+    font-size: 13px !important;
+
+    transition: 0.3s;
+}
+
+
+.pacientes-fila > button:hover {
+    background: #063940 !important;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   LINHA
+========================================== */
+
+hr {
+    border: none;
+
+    border-top: 2px solid #8ebdb6;
+
+    margin: 30px 0;
+}
+
+
+/* ==========================================
+   FORMULÁRIO
+========================================== */
+
+.container > input,
+.container > select,
+.container > textarea {
+
+    display: block;
+
+    width: 100%;
+
+    margin-bottom: 16px;
+
+    padding: 14px 15px;
+
+    border: 2px solid #8ebdb6;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #063940;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+
+.container > input:focus,
+.container > select:focus,
+.container > textarea:focus {
+
+    border-color: #3e838c;
+
+    box-shadow:
+        0 0 0 4px rgba(62, 131, 140, 0.18);
+}
+
+
+.container > input::placeholder,
+.container > textarea::placeholder {
+
+    color: #6d8886;
+}
+
+
+/* ==========================================
+   SELECT
+========================================== */
+
+.container select {
+
+    cursor: pointer;
+
+    color: #195e63;
+}
+
+
+/* ==========================================
+   TEXTAREA
+========================================== */
+
+.container textarea {
+
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+/* ==========================================
+   RESULTADO DA TRIAGEM
+========================================== */
+
+#resultado {
+
+    margin: 20px 0;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+/* ==========================================
+   RISCO VERDE
+========================================== */
+
+#resultado.verde {
+
+    background: #8ebdb6 !important;
+
+    color: #063940 !important;
+
+    border: 2px solid #3e838c !important;
+}
+
+
+/* ==========================================
+   RISCO AMARELO
+========================================== */
+
+#resultado.amarelo {
+
+    background: #ece1c3 !important;
+
+    color: #195e63 !important;
+
+    border: 2px solid #8ebdb6 !important;
+}
+
+
+/* ==========================================
+   RISCO VERMELHO
+========================================== */
+
+#resultado.vermelho {
+
+    background: #195e63 !important;
+
+    color: #ece1c3 !important;
+
+    border: 2px solid #063940 !important;
+}
+
+
+/* ==========================================
+   BOTÃO SALVAR
+========================================== */
+
+.container > button:last-of-type {
+
+    width: 100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063940,
+            #195e63
+        ) !important;
+
+    color: #ece1c3 !important;
+
+    border: none !important;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.container > button:last-of-type:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #195e63,
+            #3e838c
+        ) !important;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(6, 57, 64, 0.30);
+}
+
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 15px;
+    }
+
+
+    .container {
+        padding: 22px 18px;
+    }
+
+
+    .container > div:first-child {
+
+        flex-direction: column;
+
+        align-items: flex-start !important;
+
+        gap: 15px;
+    }
+
+
+    .btn-abrir-tv {
+        width: 100%;
+    }
+
+
+    .pacientes-fila h3 {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .pacientes-fila h3 span {
+
+        text-align: left;
+    }
+
+
+    .fila-item {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+
+    .btn-tv {
+
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+}

@@ -1,33 +1,128 @@
 <!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<div class="container">
-  <h2>🏥 Sistema Hospitalar</h2>
-  <input id="usuario" placeholder="Usuário">
-  <input id="senha" type="password" placeholder="Senha">
-  <button onclick="login()">Entrar</button>
-</div>
+<html lang="pt-BR">
 
-<script>
-function login() {
-  fetch("http://localhost:3000/login", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      usuario: usuario.value,
-      senha: senha.value
-    })
-  })
-  .then(r => r.json())
-  .then(data => {
-    if(data.tipo === "triagem") location.href = "triagem.html";
-    if(data.tipo === "medico") location.href = "medico.html";
-    if(data.tipo === "atendimento") location.href = "atendimento.html";
-  });
-}
-</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital GV - Login</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+
+    <div class="background">
+
+        <div class="container">
+
+            <!-- Logo do Hospital (Substituindo o ícone anterior) -->
+            <img src="Gemini_Generated_Image_n3kofkn3kofkn3ko.jpg"Logo Hospital GV" class="logo-login">
+
+            <!-- Nome do hospital -->
+            <h1>Hospital GV</h1>
+
+            <p class="subtitle">
+                Sistema de Gestão Hospitalar
+            </p>
+
+            <!-- Formulário -->
+            <div class="form">
+
+                <div class="input-group">
+                    <label for="usuario">Usuário</label>
+                    <input
+                        type="text"
+                        id="usuario"
+                        placeholder="Digite seu usuário"
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input
+                        type="password"
+                        id="senha"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <!-- Mensagem de erro -->
+                <p id="mensagem"></p>
+
+                <!-- Botão -->
+                <button onclick="login()">
+                    Entrar
+                </button>
+
+            </div>
+
+            <!-- Rodapé -->
+            <div class="footer">
+                <p>Hospital GV © 2026</p>
+                <span>Sistema seguro de acesso</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function login() {
+            const usuario = document.getElementById("usuario").value;
+            const senha = document.getElementById("senha").value;
+            const mensagem = document.getElementById("mensagem");
+
+            if (usuario === "" || senha === "") {
+                mensagem.textContent = "⚠️ Preencha usuário e senha.";
+                mensagem.className = "erro";
+                return;
+            }
+
+            mensagem.textContent = "Verificando acesso...";
+            mensagem.className = "carregando";
+
+            fetch("http://localhost:3000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    usuario: usuario,
+                    senha: senha
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Erro no servidor");
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.tipo === "triagem") {
+                    window.location.href = "triagem.html";
+                } else if (data.tipo === "medico") {
+                    window.location.href = "medico.html";
+                } else if (data.tipo === "atendimento") {
+                    window.location.href = "atendimento.html";
+                } else {
+                    mensagem.textContent = "❌ Usuário ou senha incorretos.";
+                    mensagem.className = "erro";
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                mensagem.textContent = "❌ Não foi possível conectar ao servidor.";
+                mensagem.className = "erro";
+            });
+        }
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                login();
+            }
+        });
+    </script>
+
 </body>
 </html>

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Mídia Indoor - TV</title>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
     body {
-      background-color: #5c4033;
+      background-color: #063940;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -37,8 +44,8 @@
     }
 
     .box {
-      background-color: #63d4f4;
-      border: 6px solid #b39b82;
+      background-color: #195e63;
+      border: 6px solid #8ebdb6;
       border-radius: 15px;
       padding: 20px;
       display: flex;
@@ -46,28 +53,32 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .box-title {
-      color: #ffffff;
+      color: #ece1c3;
       font-size: 2.2vw;
       font-weight: bold;
       text-transform: uppercase;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
       margin-bottom: 12px;
     }
 
-    /* Painel esquerdo - local (guichê ou consultório) */
-    .local-box { flex: 1; }
+    /* Painel esquerdo */
+    .local-box {
+      flex: 1;
+    }
+
     .local-number {
-      color: #d12c2c;
+      color: #ece1c3;
       font-size: 9vw;
       font-weight: bold;
       line-height: 1;
     }
+
     .local-type {
-      color: #555;
+      color: #8ebdb6;
       font-size: 1.8vw;
       font-weight: bold;
       margin-top: 6px;
@@ -79,116 +90,175 @@
       justify-content: flex-start;
       align-items: flex-start;
     }
-    .history-box .box-title { font-size: 1.8vw; align-self: center; }
+
+    .history-box .box-title {
+      font-size: 1.8vw;
+      align-self: center;
+    }
+
     #history-list {
       list-style: none;
       width: 100%;
-      color: #d12c2c;
+      color: #ece1c3;
       font-size: 1.5vw;
       font-weight: bold;
       text-align: left;
     }
+
     #history-list li {
       margin-bottom: 8px;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(142, 189, 182, 0.4);
       padding-bottom: 5px;
     }
 
-    /* Painel direito - nome do paciente */
-    .patient-box { flex: 3; }
+    /* Paciente */
+    .patient-box {
+      flex: 3;
+      background-color: #3e838c;
+    }
+
     .patient-name {
-      color: #d12c2c;
+      color: #ece1c3;
       font-size: 6.5vw;
       font-weight: bold;
       line-height: 1.2;
       word-break: break-word;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     /* Logo */
-    .logo-box { flex: 1; }
+    .logo-box {
+      flex: 1;
+      background-color: #195e63;
+    }
+
     .logo-text {
-      color: #8c3b7a;
+      color: #ece1c3;
       font-size: 3.5vw;
       font-weight: bold;
       text-transform: uppercase;
     }
 
-    /* Animação de flash quando chama */
+    /* Animação de chamada */
     @keyframes flash {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-    .flash { animation: flash 0.5s ease 3; }
-  </style>
-</head>
-<body>
-
-<!-- Estrutura da tela da TV criada para exibir o local e o nome do paciente chamado -->
-<div class="tv-container">
-  <div class="left-panel">
-    <div class="box local-box">
-      <div class="box-title" id="local-tipo">GUICHÊ</div>
-      <div class="local-number" id="local-numero">--</div>
-    </div>
-    <div class="box history-box">
-      <div class="box-title">ÚLTIMAS CHAMADAS</div>
-      <ul id="history-list"></ul>
-    </div>
-  </div>
-  <div class="right-panel">
-    <div class="box patient-box">
-      <div class="box-title">PACIENTE</div>
-      <div class="patient-name" id="patient-name">AGUARDANDO...</div>
-    </div>
-    <div class="box logo-box">
-      <div class="logo-text">🏥 Sistema Hospitalar</div>
-    </div>
-  </div>
-</div>
-
-<script>
-let ultimoId = null;
-
-// Função criada para buscar a chamada atual e o histórico da TV em tempo real.
-function atualizar() {
-  fetch("/tv/chamada")
-    .then(r => r.json())
-    .then(data => {
-      const chamada = data.chamada;
-      const historico = data.historico || [];
-
-      if (chamada) {
-        document.getElementById("local-tipo").innerText = chamada.localTipo || "GUICHÊ";
-        document.getElementById("local-numero").innerText = chamada.localNumero || "--";
-        document.getElementById("patient-name").innerText = chamada.paciente || "AGUARDANDO...";
-
-        // Flash visual quando há chamada nova
-        if (chamada.id !== ultimoId) {
-          ultimoId = chamada.id;
-          const patientBox = document.querySelector(".patient-box");
-          patientBox.classList.remove("flash");
-          void patientBox.offsetWidth; // reflow
-          patientBox.classList.add("flash");
-        }
+      0%, 100% {
+        opacity: 1;
       }
 
-      // Histórico
-      const list = document.getElementById("history-list");
-      list.innerHTML = "";
-      historico.slice(0, 4).forEach(h => {
-        const li = document.createElement("li");
-        const tipo = h.localTipo ? h.localTipo.substring(0,4) : "GUIC";
-        li.innerText = `${tipo}. ${h.localNumero} - ${h.paciente}`;
-        list.appendChild(li);
-      });
-    })
-    .catch(err => console.log("Erro ao buscar chamada:", err));
-}
+      50% {
+        opacity: 0.3;
+      }
+    }
 
-// Polling a cada 2 segundos
-atualizar();
-setInterval(atualizar, 2000);
-</script>
+    .flash {
+      animation: flash 0.5s ease 3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Estrutura da tela da TV criada para exibir o local e o nome do paciente chamado -->
+  <div class="tv-container">
+
+    <div class="left-panel">
+
+      <div class="box local-box">
+        <div class="box-title" id="local-tipo">GUICHÊ</div>
+        <div class="local-number" id="local-numero">--</div>
+      </div>
+
+      <div class="box history-box">
+        <div class="box-title">ÚLTIMAS CHAMADAS</div>
+        <ul id="history-list"></ul>
+      </div>
+
+    </div>
+
+    <div class="right-panel">
+
+      <div class="box patient-box">
+        <div class="box-title">PACIENTE</div>
+        <div class="patient-name" id="patient-name">AGUARDANDO...</div>
+      </div>
+
+      <div class="box logo-box">
+        <div class="logo-text">🏥 Sistema Hospitalar</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    let ultimoId = null;
+
+    // Função criada para buscar a chamada atual e o histórico da TV em tempo real.
+    function atualizar() {
+      fetch("/tv/chamada")
+        .then(r => r.json())
+        .then(data => {
+
+          const chamada = data.chamada;
+          const historico = data.historico || [];
+
+          if (chamada) {
+
+            document.getElementById("local-tipo").innerText =
+              chamada.localTipo || "GUICHÊ";
+
+            document.getElementById("local-numero").innerText =
+              chamada.localNumero || "--";
+
+            document.getElementById("patient-name").innerText =
+              chamada.paciente || "AGUARDANDO...";
+
+            // Flash visual quando há chamada nova
+            if (chamada.id !== ultimoId) {
+
+              ultimoId = chamada.id;
+
+              const patientBox =
+                document.querySelector(".patient-box");
+
+              patientBox.classList.remove("flash");
+
+              void patientBox.offsetWidth;
+
+              patientBox.classList.add("flash");
+            }
+          }
+
+          // Histórico
+          const list =
+            document.getElementById("history-list");
+
+          list.innerHTML = "";
+
+          historico.slice(0, 4).forEach(h => {
+
+            const li = document.createElement("li");
+
+            const tipo = h.localTipo
+              ? h.localTipo.substring(0, 4)
+              : "GUIC";
+
+            li.innerText =
+              `${tipo}. ${h.localNumero} - ${h.paciente}`;
+
+            list.appendChild(li);
+          });
+
+        })
+        .catch(err =>
+          console.log("Erro ao buscar chamada:", err)
+        );
+    }
+
+    // Polling a cada 2 segundos
+    atualizar();
+    setInterval(atualizar, 2000);
+  </script>
 
 </body>
 </html>

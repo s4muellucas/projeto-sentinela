@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   FUNDO
+========================= */
+
+body {
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063940,
+            #195e63,
+            #3e838c
+        );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 850px;
+    max-width: 100%;
+
+    background: #ece1c3;
+
+    padding: 35px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 15px 40px rgba(6, 57, 64, 0.40);
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.container h2 {
+    color: #063940;
+
+    font-size: 28px;
+
+    margin-bottom: 30px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 2px solid #8ebdb6;
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
+#listaMedicacoes {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    background: #ffffff;
+
+    border: 1px solid #8ebdb6;
+
+    border-left: 5px solid #195e63;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    transition: 0.3s;
+}
+
+
+/* =========================
+   HOVER DO CARD
+========================= */
+
+.card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(6, 57, 64, 0.18);
+
+    border-left-color: #063940;
+}
+
+
+/* =========================
+   NOME DO PACIENTE
+========================= */
+
+.card h3 {
+    color: #063940;
+
+    font-size: 21px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.card p {
+    color: #195e63;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin-top: 8px;
+}
+
+
+/* =========================
+   TEXTOS EM NEGRITO
+========================= */
+
+.card b {
+    color: #3e838c;
+}
+
+
+/* =========================
+   NENHUMA MEDICAÇÃO
+========================= */
+
+#listaMedicacoes > p {
+
+    text-align: center;
+
+    color: #195e63;
+
+    background: #8ebdb6;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    border: 1px dashed #3e838c;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        padding: 25px 20px;
+    }
+
+    .container h2 {
+        font-size: 23px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+}
