@@ -32,6 +32,37 @@ body {
   border-bottom: 1px solid #8ebdb6;
 }
 
+/* Logo do Hospital GV feita em CSS para funcionar no Render sem depender de imagem */
+.painel-header > div:first-child {
+  position: relative;
+  min-height: 64px;
+  padding-left: 78px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.painel-header > div:first-child::before {
+  content: "GV+";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #063940, #3e838c);
+  color: #ece1c3;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 18px rgba(6, 57, 64, 0.25);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
 .painel-header h2 {
   color: #063940;
   font-size: 30px;
@@ -303,6 +334,17 @@ hr {
   .painel-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .painel-header > div:first-child {
+    padding-left: 70px;
+  }
+
+  .painel-header > div:first-child::before {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    font-size: 17px;
   }
 
   .btn-abrir-tv {
