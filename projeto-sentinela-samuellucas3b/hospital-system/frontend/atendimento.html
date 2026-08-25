@@ -1,48 +1,61 @@
 <!DOCTYPE html>
-<html>
-<head><link rel="stylesheet" href="style.css1"></head>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital GV - Atendimento</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<div class="container">
-<h2>Atendimento</h2>
+  <div class="container">
+    <h2>Atendimento</h2>
 
-<input id="nome" placeholder="Nome">
-<input id="cpf" placeholder="CPF">
-<input id="data_nascimento" placeholder="Data de nascimento">
-<input id="sexo" placeholder="Sexo">
-<input id="nome_mae" placeholder="Nome da mãe">
-<input id="estado_civil" placeholder="Estado civil">
-<input id="endereco" placeholder="Endereço">
-<input id="telefone" placeholder="Telefone">
-<input id="email" placeholder="E-mail">
-<input id="contato_emergencia" placeholder="Contato de emergência">
+    <input id="nome" placeholder="Nome">
+    <input id="cpf" placeholder="CPF">
+    <input id="data_nascimento" placeholder="Data de nascimento">
+    <input id="sexo" placeholder="Sexo">
+    <input id="nome_mae" placeholder="Nome da mãe">
+    <input id="estado_civil" placeholder="Estado civil">
+    <input id="endereco" placeholder="Endereço">
+    <input id="telefone" placeholder="Telefone">
+    <input id="email" placeholder="E-mail">
+    <input id="contato_emergencia" placeholder="Contato de emergência">
 
+    <select id="tipo">
+      <option>Convenio</option>
+      <option>Particular</option>
+    </select>
 
+    <input type="file" id="foto">
 
+    <button onclick="cadastrar()">Cadastrar</button>
+  </div>
 
-
-<select id="tipo">
-  <option>Convenio</option>
-  <option>Particular</option>
-</select>
-
-<input type="file" id="foto">
-
-<button onclick="cadastrar()">Cadastrar</button>
-</div>
-
-<script>
-function cadastrar(){
- fetch("http://localhost:3000/atendimento",{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body: JSON.stringify({
-    nome: nome.value,
-    cpf: cpf.value,
-    tipo: tipo.value
-  })
- });
- alert("Paciente enviado para triagem");
-}
-</script>
+  <script>
+    function cadastrar() {
+      fetch("/atendimento", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: nome.value,
+          cpf: cpf.value,
+          tipo: tipo.value
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Erro ao cadastrar paciente");
+        }
+        return response.json();
+      })
+      .then(() => {
+        alert("Paciente enviado para triagem");
+      })
+      .catch(error => {
+        console.error(error);
+        alert("Não foi possível cadastrar o paciente.");
+      });
+    }
+  </script>
 </body>
 </html>
