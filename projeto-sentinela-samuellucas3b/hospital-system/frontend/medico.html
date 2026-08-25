@@ -1,43 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
- <link rel="stylesheet" href="style4.css">
- 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital GV - Painel Médico</title>
+  <link rel="stylesheet" href="style-medico.css">
 </head>
 
 <body>
 
 <div class="container">
 
-  <!-- Cabeçalho com botão da TV -->
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-    <h2 style="margin:0;">🩺 Painel Médico</h2>
+  <div class="painel-header">
+    <div>
+      <h2>🩺 Painel Médico</h2>
+      <p>Fila de pacientes e registro de consultas</p>
+    </div>
     <button class="btn-abrir-tv" onclick="window.open('tv.html','_blank')">📺 Abrir Tela da TV</button>
   </div>
 
-  <!-- Campo criado para informar o consultório e chamar o paciente na TV -->
   <div class="consultorio-input">
-    <label>Meu Consultório:</label>
+    <label for="consultorio-num">Meu Consultório:</label>
     <input type="text" id="consultorio-num" value="01">
-    <span style="color:#666; font-size:13px;">Este número será exibido na TV ao chamar o paciente.</span>
+    <span class="consultorio-ajuda">Este número será exibido na TV ao chamar o paciente.</span>
   </div>
 
+  <h3 class="secao-titulo">Pacientes aguardando atendimento</h3>
   <div id="triagens"></div>
 
   <hr>
 
-  <h3>Consulta</h3>
+  <div class="consulta-box">
+    <h3>Consulta</h3>
 
-  <input id="paciente" placeholder="Paciente" readonly>
-  <input id="diagnostico" placeholder="Diagnóstico">
+    <div class="form-consulta">
+      <input id="paciente" placeholder="Paciente" readonly>
+      <input id="diagnostico" placeholder="Diagnóstico">
 
-  <select id="medicacao">
-    <option value="">Selecione a medicação</option>
-  </select>
+      <select id="medicacao">
+        <option value="">Selecione a medicação</option>
+      </select>
 
-  <textarea id="obs" placeholder="Observações"></textarea>
+      <textarea id="obs" placeholder="Observações"></textarea>
 
-  <button onclick="salvar()">Salvar</button>
+      <button class="btn-salvar" onclick="salvar()">Salvar consulta</button>
+    </div>
+  </div>
 
 </div>
 
@@ -55,7 +63,7 @@ function carregar() {
       div.innerHTML = "";
 
       if (data.length === 0) {
-        div.innerHTML = "<p style='color:#888; text-align:center;'>Nenhum paciente na fila.</p>";
+        div.innerHTML = "<p class='fila-vazia'>Nenhum paciente na fila.</p>";
         return;
       }
 
@@ -68,7 +76,7 @@ function carregar() {
             <p><span class="${t.risco}">${t.risco}</span></p>
             <p><b>Alergia:</b> ${t.alergia || "Nenhuma"}</p>
             <p><b>Observação:</b> ${t.observacao || "Nenhuma"}</p>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <div class="acoes-card">
               <button onclick="selecionar(${index})">Atender</button>
               <button class="btn-tv" onclick="chamarNaTV('${t.nome}')">📺 Chamar na TV</button>
             </div>
@@ -78,7 +86,6 @@ function carregar() {
     });
 }
 
-// Função criada para enviar o nome do paciente para a TV quando ele for chamado no consultório.
 function chamarNaTV(nome) {
   const consultorio = document.getElementById("consultorio-num").value || "01";
   fetch("/tv/chamar", {
@@ -146,8 +153,6 @@ function salvar() {
 
 carregar();
 carregarMedicacoes();
-
-// Atualiza lista automaticamente a cada 10 segundos
 setInterval(carregar, 10000);
 
 </script>
