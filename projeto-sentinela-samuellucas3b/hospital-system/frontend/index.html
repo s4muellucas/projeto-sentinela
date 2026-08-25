@@ -15,7 +15,7 @@
         <div class="container">
 
             <!-- Logo do Hospital (Substituindo o ícone anterior) -->
-            <img src="Gemini_Generated_Image_n3kofkn3kofkn3ko.jpg"Logo Hospital GV" class="logo-login">
+            <img src="Gemini_Generated_Image_n3kofkn3kofkn3ko.jpg" alt="Logo Hospital GV" class="logo-login">
 
             <!-- Nome do hospital -->
             <h1>Hospital GV</h1>
@@ -82,7 +82,7 @@
             mensagem.textContent = "Verificando acesso...";
             mensagem.className = "carregando";
 
-            fetch("http://localhost:3000/login", {
+            fetch("/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
