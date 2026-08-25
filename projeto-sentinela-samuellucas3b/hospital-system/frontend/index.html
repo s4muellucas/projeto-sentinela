@@ -14,17 +14,14 @@
 
         <div class="container">
 
-            <!-- Logo do Hospital (Substituindo o ícone anterior) -->
             <img src="Gemini_Generated_Image_n3kofkn3kofkn3ko.jpg" alt="Logo Hospital GV" class="logo-login">
 
-            <!-- Nome do hospital -->
             <h1>Hospital GV</h1>
 
             <p class="subtitle">
                 Sistema de Gestão Hospitalar
             </p>
 
-            <!-- Formulário -->
             <div class="form">
 
                 <div class="input-group">
@@ -47,17 +44,14 @@
                     >
                 </div>
 
-                <!-- Mensagem de erro -->
                 <p id="mensagem"></p>
 
-                <!-- Botão -->
                 <button onclick="login()">
                     Entrar
                 </button>
 
             </div>
 
-            <!-- Rodapé -->
             <div class="footer">
                 <p>Hospital GV © 2026</p>
                 <span>Sistema seguro de acesso</span>
@@ -69,7 +63,7 @@
 
     <script>
         function login() {
-            const usuario = document.getElementById("usuario").value;
+            const usuario = document.getElementById("usuario").value.trim();
             const senha = document.getElementById("senha").value;
             const mensagem = document.getElementById("mensagem");
 
@@ -87,16 +81,24 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
-                    usuario: usuario,
-                    senha: senha
-                })
+                body: JSON.stringify({ usuario, senha })
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Erro no servidor");
+            .then(async response => {
+                let data = {};
+
+                try {
+                    data = await response.json();
+                } catch (_) {}
+
+                if (response.status === 401) {
+                    throw new Error("LOGIN_INVALIDO");
                 }
-                return response.json();
+
+                if (!response.ok) {
+                    throw new Error(`SERVIDOR_${response.status}`);
+                }
+
+                return data;
             })
             .then(data => {
                 if (data.tipo === "triagem") {
@@ -106,13 +108,19 @@
                 } else if (data.tipo === "atendimento") {
                     window.location.href = "atendimento.html";
                 } else {
-                    mensagem.textContent = "❌ Usuário ou senha incorretos.";
+                    mensagem.textContent = "❌ Tipo de usuário não reconhecido.";
                     mensagem.className = "erro";
                 }
             })
             .catch(error => {
-                console.error("Erro:", error);
-                mensagem.textContent = "❌ Não foi possível conectar ao servidor.";
+                console.error("Erro no login:", error);
+
+                if (error.message === "LOGIN_INVALIDO") {
+                    mensagem.textContent = "❌ Usuário ou senha incorretos.";
+                } else {
+                    mensagem.textContent = "❌ Não foi possível conectar ao servidor.";
+                }
+
                 mensagem.className = "erro";
             });
         }
