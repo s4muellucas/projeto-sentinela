@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital GV - Atendimento</title>
+  <link rel="stylesheet" href="style-atendimento.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h2>Atendimento</h2>
+
+    <input id="nome" placeholder="Nome">
+    <input id="cpf" placeholder="CPF">
+    <input id="data_nascimento" placeholder="Data de nascimento">
+    <input id="sexo" placeholder="Sexo">
+    <input id="nome_mae" placeholder="Nome da mãe">
+    <input id="estado_civil" placeholder="Estado civil">
+    <input id="endereco" placeholder="Endereço">
+    <input id="telefone" placeholder="Telefone">
+    <input id="email" placeholder="E-mail">
+    <input id="contato_emergencia" placeholder="Contato de emergência">
+
+    <select id="tipo">
+      <option>Convenio</option>
+      <option>Particular</option>
+    </select>
+
+    <input type="file" id="foto">
+
+    <button onclick="cadastrar()">Cadastrar</button>
+
+  </div>
+
+  <script>
+
+    function cadastrar() {
+
+      fetch("/atendimento", {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+          nome: document.getElementById("nome").value,
+          cpf: document.getElementById("cpf").value,
+          data_nascimento: document.getElementById("data_nascimento").value,
+          sexo: document.getElementById("sexo").value,
+          nome_mae: document.getElementById("nome_mae").value,
+          estado_civil: document.getElementById("estado_civil").value,
+          endereco: document.getElementById("endereco").value,
+          telefone: document.getElementById("telefone").value,
+          email: document.getElementById("email").value,
+          contato_emergencia: document.getElementById("contato_emergencia").value,
+          tipo: document.getElementById("tipo").value
+
+        })
+
+      })
+
+      .then(response => {
+
+        if (!response.ok) {
+          throw new Error("Erro ao cadastrar paciente");
+        }
+
+        return response.json();
+
+      })
+
+      .then(() => {
+
+        alert("Paciente enviado para triagem");
+
+      })
+
+      .catch(error => {
+
+        console.error(error);
+
+        alert("Não foi possível cadastrar o paciente.");
+
+      });
+
+    }
+
+  </script>
+
+</body>
+</html>

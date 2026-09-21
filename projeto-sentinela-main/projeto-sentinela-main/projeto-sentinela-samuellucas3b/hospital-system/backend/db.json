@@ -1,0 +1,38 @@
+{
+  "usuarios": [
+    {
+      "usuario": "triagem",
+      "senha": "123",
+      "tipo": "triagem"
+    },
+    {
+      "usuario": "medico",
+      "senha": "123",
+      "tipo": "medico"
+    },
+    {
+      "usuario": "atendimento",
+      "senha": "123",
+      "tipo": "atendimento"
+    }
+  ],
+  "pacientes": [],
+  "triagens": [],
+  "consultas": [],
+  "tv_chamada": null,
+  "tv_historico": [],
+  "internacoes": [
+    {
+      "id": 1790001951209,
+      "nome": "d",
+      "cpf": "",
+      "nascimento": "",
+      "motivo": "",
+      "setor": "",
+      "data": "",
+      "leito": "",
+      "status": "internado",
+      "createdAt": "2026-09-21T14:45:51.209Z"
+    }
+  ]
+}

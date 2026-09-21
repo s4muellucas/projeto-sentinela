@@ -1,0 +1,46 @@
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #063940, #195e63, #3e838c);
+  padding: 35px 20px;
+  color: #ffffff;
+}
+
+h1 {
+  color: #ffffff;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+body > .container > p {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 28px;
+}
+
+h2 {
+  color: #ffffff;
+  font-size: 21px;
+  margin: 25px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #8ebdb6;
+}
+
+label {
+  display: block;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 2px solid #6ca59f;
+  border-radius: 10px;
+  background: #fff;
+  color: #063940;
+  font-size: 15px;
+  outline: none;
+}

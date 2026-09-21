@@ -1,0 +1,308 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   FUNDO
+========================= */
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(
+        135deg,
+        #063940,
+        #195e63,
+        #3e838c
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =========================
+   ÁREA PRINCIPAL
+========================= */
+
+.background {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* =========================
+   CARTÃO
+========================= */
+
+.container {
+    width: 420px;
+    background: #ece1c3;
+    padding: 45px 40px 30px;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(6, 57, 64, 0.40);
+    text-align: center;
+    animation: aparecer 0.7s ease;
+}
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   LOGO DO HOSPITAL
+========================= */
+
+/* Caso a logo esteja solta na container */
+.logo-login {
+    display: block;
+    width: 120px;
+    height: auto;
+    margin: 0 auto 20px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 12px rgba(6, 57, 64, 0.25));
+    transition: transform 0.3s ease;
+}
+
+.logo-login:hover {
+    transform: scale(1.05);
+}
+
+/* Caso queira usar a logo dentro do círculo (.hospital-icon) */
+.hospital-icon {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #8ebdb6;
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(6, 57, 64, 0.18);
+    overflow: hidden;
+}
+
+.hospital-icon img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+/* =========================
+   NOME DO HOSPITAL
+========================= */
+
+.container h1 {
+    color: #063940;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+/* =========================
+   SUBTÍTULO
+========================= */
+
+.subtitle {
+    color: #195e63;
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.form {
+    width: 100%;
+    text-align: left;
+}
+
+/* =========================
+   GRUPO DOS INPUTS
+========================= */
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+/* =========================
+   LABEL
+========================= */
+
+.input-group label {
+    display: block;
+    color: #063940;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* =========================
+   INPUT
+========================= */
+
+.input-group input {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    border: 2px solid #8ebdb6;
+    border-radius: 12px;
+    outline: none;
+    font-size: 16px;
+    color: #063940;
+    background: #ffffff;
+    transition: 0.3s;
+}
+
+/* =========================
+   INPUT SELECIONADO
+========================= */
+
+.input-group input:focus {
+    border-color: #3e838c;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(62, 131, 140, 0.18);
+}
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+.input-group input::placeholder {
+    color: #6d8886;
+}
+
+/* =========================
+   MENSAGEM
+========================= */
+
+#mensagem {
+    min-height: 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* =========================
+   ERRO
+========================= */
+
+.erro {
+    color: #195e63;
+    font-weight: 600;
+}
+
+/* =========================
+   CARREGANDO
+========================= */
+
+.carregando {
+    color: #3e838c;
+    font-weight: 600;
+}
+
+/* =========================
+   BOTÃO
+========================= */
+
+button {
+    width: 100%;
+    height: 53px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(
+        135deg,
+        #063940,
+        #195e63
+    );
+    color: #ece1c3;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 8px 18px rgba(6, 57, 64, 0.28);
+}
+
+/* =========================
+   HOVER
+========================= */
+
+button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(
+        135deg,
+        #195e63,
+        #3e838c
+    );
+    box-shadow: 0 12px 25px rgba(6, 57, 64, 0.35);
+}
+
+/* =========================
+   CLIQUE
+========================= */
+
+button:active {
+    transform: translateY(0);
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #8ebdb6;
+    color: #195e63;
+    font-size: 12px;
+}
+
+.footer p {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.footer span {
+    color: #3e838c;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 500px) {
+    .container {
+        width: 100%;
+        padding: 35px 25px 25px;
+        border-radius: 20px;
+    }
+
+    .container h1 {
+        font-size: 29px;
+    }
+
+    .logo-login {
+        width: 95px;
+    }
+
+    .hospital-icon {
+        width: 75px;
+        height: 75px;
+    }
+}

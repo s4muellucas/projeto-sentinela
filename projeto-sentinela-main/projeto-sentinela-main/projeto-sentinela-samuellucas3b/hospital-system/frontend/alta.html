@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hospital GV - Alta Médica</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #ece1c3;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .header {
+      background-color: #063940;
+      color: white;
+      padding: 25px;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      color: #8ebdb6;
+      font-size: 15px;
+    }
+
+    .alta-box {
+      background-color: white;
+      padding: 35px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .alta-box h2 {
+      color: #063940;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #8ebdb6;
+      padding-bottom: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      color: #195e63;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #8ebdb6;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #195e63;
+      box-shadow: 0 0 0 2px rgba(25, 94, 99, 0.15);
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .botoes {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .botoes button {
+      border: none;
+      border-radius: 8px;
+      padding: 14px 25px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-voltar {
+      background-color: #d9d9d9;
+      color: #333;
+    }
+
+    .btn-voltar:hover {
+      background-color: #c5c5c5;
+    }
+
+    .btn-pdf {
+      background-color: #195e63;
+      color: white;
+    }
+
+    .btn-pdf:hover {
+      background-color: #063940;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 10px;
+      }
+
+      .alta-box {
+        padding: 25px 20px;
+      }
+
+      .botoes {
+        flex-direction: column;
+      }
+
+      .botoes button {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 100%;
+      }
+
+      .alta-box {
+        box-shadow: none;
+      }
+
+      .botoes {
+        display: none;
+      }
+
+      input,
+      textarea {
+        border: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>🏥 Hospital GV</h1>
+      <p>Documento de Alta Médica</p>
+    </div>
+
+    <div class="alta-box">
+
+      <h2>Alta Médica</h2>
+
+      <div class="form-group">
+        <label for="paciente">Paciente</label>
+        <input
+          type="text"
+          id="paciente"
+          placeholder="Nome do paciente"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="diagnostico">Diagnóstico</label>
+        <input
+          type="text"
+          id="diagnostico"
+          placeholder="Diagnóstico do paciente"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="medicacao">Medicação</label>
+        <input
+          type="text"
+          id="medicacao"
+          placeholder="Medicação utilizada"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="orientacoes">Orientações médicas</label>
+
+        <textarea
+          id="orientacoes"
+          placeholder="Digite as orientações para o paciente..."
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="dataAlta">Data da alta</label>
+        <input type="date" id="dataAlta">
+      </div>
+
+      <div class="botoes">
+
+        <button class="btn-voltar" onclick="voltar()">
+          ← Voltar
+        </button>
+
+        <button class="btn-pdf" onclick="gerarPDF()">
+          📄 Gerar PDF
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function voltar() {
+      window.location.href = "medico.html";
+    }
+
+    function gerarPDF() {
+      window.print();
+    }
+
+    const hoje = new Date();
+    const dataFormatada = hoje.toISOString().split("T")[0];
+
+    document.getElementById("dataAlta").value = dataFormatada;
+  </script>
+
+</body>
+
+</html>

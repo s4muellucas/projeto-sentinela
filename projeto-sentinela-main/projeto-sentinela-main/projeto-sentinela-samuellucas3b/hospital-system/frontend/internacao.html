@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internação - Projeto Sentinela</title>
+    <link rel="stylesheet" href="internacao.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Internação de Paciente</h1>
+
+        <p>
+            Preencha os dados para registrar a internação.
+        </p>
+
+        <div class="consulta-box">
+
+            <h2>Dados do paciente</h2>
+
+            <div class="form-consulta">
+
+                <div>
+                    <label for="nome">Nome do paciente:</label>
+                    <input type="text" id="nome" name="nome">
+                </div>
+
+                <div>
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf">
+                </div>
+
+                <div>
+                    <label for="nascimento">Data de nascimento:</label>
+                    <input type="date" id="nascimento" name="nascimento">
+                </div>
+
+            </div>
+
+            <h2>Dados da internação</h2>
+
+            <div class="form-consulta">
+
+                <div>
+                    <label for="setor">Setor:</label>
+
+                    <select id="setor" name="setor">
+                        <option value="">Selecione</option>
+                        <option value="enfermaria">Enfermaria</option>
+                        <option value="uti">UTI</option>
+                        <option value="observacao">Observação</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="data">Data da internação:</label>
+                    <input type="date" id="data" name="data">
+                </div>
+
+                <div>
+                    <label for="leito">Número do leito:</label>
+                    <input type="text" id="leito" name="leito">
+                </div>
+
+                <div>
+                    <label for="motivo">Motivo da internação:</label>
+                    <textarea id="motivo" name="motivo"></textarea>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-salvar"
+                    onclick="confirmarInternacao()"
+                >
+                    Confirmar internação
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        async function confirmarInternacao() {
+
+            const dados = {
+                nome: document.getElementById("nome").value,
+                cpf: document.getElementById("cpf").value,
+                nascimento: document.getElementById("nascimento").value,
+                motivo: document.getElementById("motivo").value,
+                setor: document.getElementById("setor").value,
+                data: document.getElementById("data").value,
+                leito: document.getElementById("leito").value
+            };
+
+            const resposta = await fetch("/internacao", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(dados)
+            });
+
+            if (resposta.ok) {
+
+                alert("Internação registrada com sucesso!");
+
+                document.getElementById("nome").value = "";
+                document.getElementById("cpf").value = "";
+                document.getElementById("nascimento").value = "";
+                document.getElementById("motivo").value = "";
+                document.getElementById("setor").value = "";
+                document.getElementById("data").value = "";
+                document.getElementById("leito").value = "";
+
+            } else {
+
+                alert("Erro ao registrar internação.");
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

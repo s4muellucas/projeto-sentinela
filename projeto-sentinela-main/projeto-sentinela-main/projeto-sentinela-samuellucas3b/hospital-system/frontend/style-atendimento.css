@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #063940, #195e63, #3e838c);
+  padding: 35px 20px;
+  color: #063940;
+}
+
+.container {
+  width: 900px;
+  max-width: 100%;
+  margin: 0 auto;
+  background: #ece1c3;
+  padding: 36px;
+  border-radius: 22px;
+  box-shadow: 0 20px 45px rgba(6, 57, 64, 0.4);
+}
+
+.container h2 {
+  font-size: 30px;
+  margin-bottom: 8px;
+  color: #063940;
+}
+
+.container::before {
+  content: "Cadastro de paciente";
+  display: block;
+  margin-bottom: 24px;
+  color: #195e63;
+  font-size: 15px;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 15px;
+  margin-bottom: 14px;
+  border: 2px solid #8ebdb6;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #063940;
+  font-size: 15px;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #3e838c;
+  box-shadow: 0 0 0 4px rgba(62, 131, 140, 0.16);
+}
+
+input::placeholder {
+  color: #6d8886;
+}
+
+input[type="file"] {
+  padding: 11px 15px;
+  background: #8ebdb6;
+  border-color: #3e838c;
+}
+
+select {
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  height: 54px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #063940, #195e63);
+  color: #ece1c3;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 8px 18px rgba(6, 57, 64, 0.28);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #195e63, #3e838c);
+  box-shadow: 0 12px 25px rgba(6, 57, 64, 0.35);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 700px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 16px;
+  }
+
+  .container h2,
+  .container::before,
+  #endereco,
+  #email,
+  #contato_emergencia,
+  #tipo,
+  #foto,
+  button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 699px) {
+  body {
+    padding: 18px 12px;
+  }
+
+  .container {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .container h2 {
+    font-size: 26px;
+  }
+}
