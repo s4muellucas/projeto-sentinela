@@ -1,3 +1,4 @@
+
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -30,6 +31,10 @@ function readDB() {
   if (!db.tv_chamada) db.tv_chamada = null;
   if (!db.tv_historico) db.tv_historico = [];
   if (!db.internacoes) db.internacoes = [];
+  if (!db.usuarios) db.usuarios = [];
+  if (!db.pacientes) db.pacientes = [];
+  if (!db.triagens) db.triagens = [];
+  if (!db.consultas) db.consultas = [];
 
   return db;
 }
@@ -79,28 +84,108 @@ app.get("/pacientes", (req, res) => {
   res.json(db.pacientes);
 });
 
+// CLASSIFICADOR AUTOMÁTICO DEMONSTRATIVO
+function classificarRiscoDemo(sintoma, temperatura) {
+  const sintomasDeAlerta = [
+    "infarto",
+    "avc",
+    "convulsao",
+    "hemorragia",
+    "falta_ar_grave"
+  ];
+
+  const sintomasDeAtencao = [
+    "febre",
+    "vomito",
+    "diarreia",
+    "falta_ar_moderada"
+  ];
+
+  const tempInformada =
+    temperatura !== undefined &&
+    temperatura !== null &&
+    String(temperatura).trim() !== "";
+
+  const temp = Number(temperatura);
+
+  if (
+    !sintoma ||
+    !tempInformada ||
+    !Number.isFinite(temp) ||
+    temp < 25 ||
+    temp > 45
+  ) {
+    return {
+      risco: "pendente",
+      motivo: "Dados incompletos ou inválidos para a demonstração."
+    };
+  }
+
+  if (sintomasDeAlerta.includes(sintoma)) {
+    return {
+      risco: "vermelho",
+      motivo: "Regra demonstrativa de alerta acionada pelo sintoma."
+    };
+  }
+
+  if (temp >= 39) {
+    return {
+      risco: "vermelho",
+      motivo: "Regra demonstrativa de temperatura acionada."
+    };
+  }
+
+  if (
+    temp >= 38 ||
+    sintomasDeAtencao.includes(sintoma)
+  ) {
+    return {
+      risco: "amarelo",
+      motivo: "Regra demonstrativa de atenção acionada."
+    };
+  }
+
+  return {
+    risco: "verde",
+    motivo: "Nenhuma regra de alerta da demonstração foi acionada."
+  };
+}
+
 // TRIAGEM
 app.post("/triagem", (req, res) => {
   const db = readDB();
 
-  let risco = req.body.risco;
+  const {
+    nome,
+    sintoma,
+    temperatura,
+    alergia,
+    observacao
+  } = req.body;
 
-  if (req.body.temperatura >= 39) {
-    risco = "vermelho";
-  } else if (req.body.temperatura >= 38) {
-    risco = "amarelo";
-  } else if (!risco) {
-    risco = "verde";
+  if (!nome || !String(nome).trim()) {
+    return res.status(400).json({
+      erro: "Informe o nome do paciente."
+    });
   }
+
+  // O servidor calcula a classificação.
+  // Não confia no risco enviado pelo frontend.
+  const classificacao = classificarRiscoDemo(
+    sintoma,
+    temperatura
+  );
 
   const triagem = {
     id: Date.now(),
-    nome: req.body.nome,
-    sintoma: req.body.sintoma,
-    temperatura: req.body.temperatura,
-    alergia: req.body.alergia,
-    observacao: req.body.observacao,
-    risco,
+    nome: String(nome).trim(),
+    sintoma,
+    temperatura,
+    alergia,
+    observacao,
+    risco: classificacao.risco,
+    motivoClassificacao: classificacao.motivo,
+    metodoClassificacao: "regras_demo",
     status: "aguardando_medico",
     createdAt: new Date()
   };
@@ -117,8 +202,7 @@ app.get("/triagens", (req, res) => {
   res.json(db.triagens);
 });
 
-// ============ MÍDIA INDOOR - TV ============
-
+// MÍDIA INDOOR - TV
 app.post("/tv/chamar", (req, res) => {
   const db = readDB();
 
@@ -192,12 +276,10 @@ app.post("/consulta", (req, res) => {
 // MEDICAÇÕES
 app.get("/medicacoes", (req, res) => {
   const db = readDB();
-
   res.json(db.consultas);
 });
 
-// ============ INTERNAÇÃO ============
-
+// INTERNAÇÃO
 app.post("/internacao", (req, res) => {
   const db = readDB();
 
@@ -215,7 +297,6 @@ app.post("/internacao", (req, res) => {
   };
 
   db.internacoes.push(internacao);
-
   writeDB(db);
 
   res.json(internacao);
@@ -224,7 +305,6 @@ app.post("/internacao", (req, res) => {
 // LISTAR INTERNAÇÕES
 app.get("/internacoes", (req, res) => {
   const db = readDB();
-
   res.json(db.internacoes);
 });
 
